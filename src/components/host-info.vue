@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import * as echarts from 'echarts';
-import { postheader } from "../setting"
+import { postheader, wsaddr } from "../setting"
 
 interface info {
     cpu_model: string,
@@ -132,10 +132,10 @@ export default defineComponent({
         fetchData() {
             fetch("/debug/infolist", postheader).then((response) => {
                 return response.json()
-            }).then((jsonData) => {
-                source = jsonData
+            }).then((jd) => {
+                source = jd as Array<serverdata>
                 (option.dataset as echarts.DatasetComponentOption).source = source
-                myChart.setOption(option);
+                myChart.setOption(option)
             })
         },
         fetchHostInfo() {
@@ -146,7 +146,7 @@ export default defineComponent({
             })
         },
         init() {
-            ws = new WebSocket("ws://192.168.31.180:9948/debug/cpu")
+            ws = new WebSocket(wsaddr + "/debug/cpu")
             ws.onmessage = (event) => {
                 let array = JSON.parse(event.data)
                 source.push(array)

@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent } from "@vue/runtime-core";
 import { ElNotification } from "element-plus"
+import { wsaddr } from "../setting";
 
 let ws: WebSocket
 
@@ -18,7 +19,7 @@ export default defineComponent({
     },
     methods: {
         init(){
-            ws = new WebSocket("ws://192.168.31.180:9948/debug/log")
+            ws = new WebSocket(wsaddr + "/debug/log")
 
             ws.onmessage = (event) => {
                 console.log(this.logText)
