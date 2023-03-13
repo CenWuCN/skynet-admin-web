@@ -24,7 +24,7 @@ export default defineConfig({
     host: "0.0.0.0",
     proxy: {
       "/debug": {
-        target: 'http://192.168.31.126:8001',
+        target: 'http://127.0.0.1:8001',
         changeOrigin: true,
       }
     }

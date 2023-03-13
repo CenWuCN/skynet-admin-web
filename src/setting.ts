@@ -6,6 +6,6 @@ let postheader = {
     },
 }
 
-let wsaddr = "ws://192.168.31.126:9948"
+let wsaddr = "ws://127.0.0.1:8001"
 
 export {postheader, wsaddr}
